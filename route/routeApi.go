@@ -3,6 +3,7 @@ package route
 import (
 	"github.com/gin-gonic/gin"
 	"github.com/vanessatocasuche/apirestGo/controller"
+	con "github.com/vanessatocasuche/apirestGo/controller"
 	"github.com/vanessatocasuche/apirestGo/repository"
 	"github.com/vanessatocasuche/apirestGo/service"
 	"net/http"
@@ -30,7 +31,7 @@ func EndPointsApp(route *gin.Engine) {
 	route.POST("/products", CreateProduct)
 	route.PUT("/products/:id", UpdateProduct)
 	route.DELETE("/product/:id", DeleteProduct)
-	route.GET("/volume", gin.BasicAuth(Users()), GetProducts)
+	route.GET("/volume", gin.BasicAuth(getUsers()), GetFileVolume)
 }
 
 /**
@@ -76,6 +77,20 @@ func DeleteProduct(ctx *gin.Context) {
 
 //Users of auth
 
-func Users() map[string]string {
-	return map[string]string{"admin": "admin", "admin1": "admin1"}
+func getUsers() map[string]string {
+
+	m := make(map[string]string) // users and passwords are staying admitted to basicAuth
+
+	m["admin"] = "admin1"
+	m["vane"] = "vane1"
+
+	return m
+}
+
+/*
+Function to help the endpoint get file Volume, and it connects with controller
+*/
+
+func GetFileVolume(ctx *gin.Context) {
+	ctx.JSON(200, con.GetFile())
 }
