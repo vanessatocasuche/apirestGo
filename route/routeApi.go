@@ -30,7 +30,7 @@ func EndPointsApp(route *gin.Engine) {
 	route.POST("/products", CreateProduct)
 	route.PUT("/products/:id", UpdateProduct)
 	route.DELETE("/product/:id", DeleteProduct)
-	//route.GET("/volume", gin.BasicAuth(Users()), GetFileVolume)
+	route.GET("/volume", gin.BasicAuth(Users()), GetProducts)
 }
 
 /**
@@ -72,4 +72,10 @@ func DeleteProduct(ctx *gin.Context) {
 	} else {
 		ctx.JSON(http.StatusOK, "Success!")
 	}
+}
+
+//Users of auth
+
+func Users() map[string]string {
+	return map[string]string{"admin": "admin", "admin1": "admin1"}
 }
