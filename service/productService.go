@@ -27,25 +27,25 @@ func New(productRepository repository.ProductRepository) ProductService {
 	}
 }
 
-func (service *productService) Save(p entity.Product) error {
-	service.repository.Save(p)
+func (thisService *productService) Save(p entity.Product) error {
+	thisService.repository.Save(p)
 	return nil
 }
 
-func (service *productService) Update(p entity.Product) error {
-	service.repository.Update(p)
+func (thisService *productService) Update(p entity.Product) error {
+	thisService.repository.Update(p)
 	return nil
 }
 
-func (service *productService) Delete(p entity.Product) error {
-	service.repository.Delete(p)
+func (thisService *productService) Delete(p entity.Product) error {
+	thisService.repository.Delete(p)
 	return nil
 }
 
-func (service *productService) GetAll() []entity.Product {
-	return service.repository.GetAll()
+func (thisService *productService) GetAll() []entity.Product {
+	return thisService.repository.GetAll()
 }
 
-func (service *productService) ExistingID(id string) bool {
-	return service.repository.ExistingID(id)
+func (thisService *productService) ExistingID(id string) bool {
+	return thisService.repository.ExistingID(id)
 }

@@ -9,7 +9,8 @@ import (
 func main() {
 
 	route := gin.Default() //Instance of the server with Framework Gin
-	r.EndPointsApp(route)  //Function with endpoints
-	route.Run(":9098")     //Run the application
+	route.SetTrustedProxies([]string{""})
+	r.EndPointsApp(route) //Function with endpoints
+	route.Run(":9098")    //Run the application
 
 }

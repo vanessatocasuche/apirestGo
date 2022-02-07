@@ -4,6 +4,7 @@ import (
 	"github.com/jinzhu/gorm"
 	_ "github.com/jinzhu/gorm/dialects/sqlite"
 	//_ "github.com/mattn/go-sqlite3"
+	_ "github.com/mattn/go-sqlite3"
 	entity "github.com/vanessatocasuche/apirestGo/entity"
 )
 
@@ -34,7 +35,7 @@ const locationDB string = ".././../../db/db-apirest-go.db"
 
 func NewDBRepository() ProductRepository {
 
-	db, err := gorm.Open("sqlite3", ".././../../db/db-apirest-go.db")
+	db, err := gorm.Open("sqlite3", "../../../../db/db-apirest-go.db")
 	if err != nil {
 		panic("Failed to connect database")
 	}

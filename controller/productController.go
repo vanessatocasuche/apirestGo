@@ -29,17 +29,17 @@ func New(service service.ProductService) ProductController {
 	}
 }
 
-func (c *productController) GetAll() []entity.Product {
-	return c.service.GetAll()
+func (thisController *productController) GetAll() []entity.Product {
+	return thisController.service.GetAll()
 }
 
-func (c *productController) GetProduct(ctx *gin.Context) entity.Product {
+func (thisController *productController) GetProduct(ctx *gin.Context) entity.Product {
 
 	id := ctx.Param("id")
-	if !c.service.ExistingID(id) {
+	if !thisController.service.ExistingID(id) {
 		panic("ID " + id + " does not exist.")
 	} else {
-		for _, product := range c.service.GetAll() {
+		for _, product := range thisController.service.GetAll() {
 			if product.IdProduct == id {
 				return product
 			}
@@ -48,23 +48,23 @@ func (c *productController) GetProduct(ctx *gin.Context) entity.Product {
 	panic("ID " + id + " does not exist.")
 }
 
-func (c *productController) Save(ctx *gin.Context) error {
+func (thisController *productController) Save(ctx *gin.Context) error {
 	var product entity.Product
 	err := ctx.ShouldBindJSON(&product)
 	if err != nil {
 		return err
 	}
 	id := ctx.Param("id")
-
-	if c.service.ExistingID(id) {
+	product.IdProduct = id
+	if thisController.service.ExistingID(id) {
 		panic("ID " + id + " already exist.")
 	} else {
-		c.service.Save(product)
+		thisController.service.Save(product)
 		return nil
 	}
 }
 
-func (c *productController) Update(ctx *gin.Context) error {
+func (thisController *productController) Update(ctx *gin.Context) error {
 	var product entity.Product
 	err := ctx.ShouldBindJSON(&product)
 	if err != nil {
@@ -73,7 +73,7 @@ func (c *productController) Update(ctx *gin.Context) error {
 
 	id := ctx.Param("id")
 	product.IdProduct = id
-	if !c.service.ExistingID(id) {
+	if !thisController.service.ExistingID(id) {
 		panic("ID " + id + " does not exist.")
 	}
 
@@ -81,17 +81,17 @@ func (c *productController) Update(ctx *gin.Context) error {
 	if err != nil {
 		return err
 	}
-	c.service.Update(product)
+	thisController.service.Update(product)
 	return nil
 }
 
-func (c *productController) Delete(ctx *gin.Context) error {
+func (thisController *productController) Delete(ctx *gin.Context) error {
 	var product entity.Product
 	id := ctx.Param("id")
-	if !c.service.ExistingID(id) {
+	if !thisController.service.ExistingID(id) {
 		panic("The ID " + id + " does not exist.")
 	}
 	product.IdProduct = id
-	c.service.Delete(product)
+	thisController.service.Delete(product)
 	return nil
 }
