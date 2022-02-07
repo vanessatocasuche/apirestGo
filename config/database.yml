@@ -1,0 +1,4 @@
+test:
+  adapter: sqlite3
+  database: "./../db/db-apirest-go.db"
+  timeout: 500
