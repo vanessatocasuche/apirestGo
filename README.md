@@ -1,5 +1,7 @@
 # Api Rest con GO, GOLAN
 
+[![Build Status](https://app.travis-ci.com/vanessatocasuche/apirestGo.svg?branch=master)](https://app.travis-ci.com/vanessatocasuche/apirestGo)
+
 Este desarrollo es una API Rest que expone endpoints CRUD, para gestionar productos y un endpoint GET para Volumenes.
 
 
