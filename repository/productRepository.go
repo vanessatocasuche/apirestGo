@@ -31,7 +31,8 @@ type database struct {
 /**
 NewDBRepository provides the connection with the SQLite database
 */
-const LOCATIONFILE string = "../../../../db/db-apirest-go.db"
+//const LOCATIONFILE string = "../../../../db/db-apirest-go.db"
+const LOCATIONFILE string = "../db/db-apirest-go.db"
 
 func NewDBRepository() ProductRepository {
 
