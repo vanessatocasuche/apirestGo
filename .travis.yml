@@ -1,0 +1,5 @@
+language: go
+go:
+  - "1.17.6"
+install:
+  - 'go mod tidy'
