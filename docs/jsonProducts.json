@@ -1,14 +1,14 @@
 {
-  "product_id": "P04",
-  "name": "6",
+  "id_product": "",
+  "name": "",
   "description": "",
-  "status": "Disponible",
+  "status": "",
   "created_date": "2019-01-01T09:41:32-05:00",
   "update_date": "2022-02-06T23:14:01-05:00",
-  "account_id": "U0687",
+  "account_id": "",
   "format_product": "",
-  "value_unit": 5000,
-  "unit_name": "Pola",
+  "value_unit": 0,
+  "unit_name": "",
   "unit_description": "",
-  "stock": 348623
+  "stock": 0
 }
