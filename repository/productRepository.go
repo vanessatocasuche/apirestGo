@@ -31,11 +31,11 @@ type database struct {
 /**
 NewDBRepository provides the connection with the SQLite database
 */
-const locationDB string = ".././../../db/db-apirest-go.db"
+const LOCATIONFILE string = "../../../../db/db-apirest-go.db"
 
 func NewDBRepository() ProductRepository {
 
-	db, err := gorm.Open("sqlite3", "../../../../db/db-apirest-go.db")
+	db, err := gorm.Open("sqlite3", LOCATIONFILE)
 	if err != nil {
 		panic("Failed to connect database")
 	}
