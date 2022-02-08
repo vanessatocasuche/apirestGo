@@ -1,4 +1,4 @@
-# Api Rest con GO, GOLAN
+# Api Rest con GO, GOLAND
 
 [![Build Status](https://app.travis-ci.com/vanessatocasuche/apirestGo.svg?branch=master)](https://app.travis-ci.com/vanessatocasuche/apirestGo)
 
@@ -16,29 +16,30 @@ Este desarrollo es una API Rest que expone endpoints CRUD, para gestionar produc
 - Correr el proyecto
 - Endpoints: GET, POST, PUT, DELETE
 - Pruebas unitarias
+- Despliegue continuo
   
 ## Diseño
 
 ### Estructura (Diagrama de componentes)
 
-El diseño consta de 3 modulos básicos:
-1. **HTTP:** Modulo que ofrece los servicios al cliente, este recibe las peticiones.
-2. **Lógica de negocio:** Espacio donde estan los requerimientos del sistema.
+El diseño consta de 3 módulos básicos:
+1. **HTTP:** Módulo que ofrece los servicios al cliente, este recibe las peticiones.
+2. **Lógica de negocio:** Espacio donde están los requerimientos del sistema.
 3. **Base de datos:** Aplicación que nos proporciona los datos
-<br>(Esto modulo está por fuera del repositorio porque es un servicio que nos proporciona otra aplicación)</br>
+<br>(Esto módulo está por fuera del repositorio porque es un servicio que nos proporciona otra aplicación)</br>
 
 
 <img width="100%" height="100%" src="docs/component-diagram.jpg">
 
 ### Principios y patrones de diseño
 
-En la API REST se evidencia el uso de los principios de diseño SOLID, como lo son **responsabilidad única** (para  *test*, ... ), **abierto cerrado** (con el uso de interfaces).
+En la API REST se evidencia el uso de los principios de diseño SOLID, como lo son **responsabilidad única** (para  *test*), **abierto cerrado** (con el uso de interfaces).
 
 Patrones de diseño como **singleton** (Instancias únicas de implementación).
 
 ## Ambiente de trabajo
 
-El desarrollo se realizó en la aplicación GolandID proporcionada por JetBrains.
+El desarrollo se realizó en la aplicación GolandIDE, proporcionada por JetBrains.
 
 En este caso el servicio de la Base de datos lo proporciono la aplicación SQLiteStudio.
 
@@ -62,20 +63,26 @@ El archivo *go.mod* contiene las librerías necesarias para ejecutar el proyecto
   go mod tidy
   ```
 
-## Configuración con la Base de Datos
+## Configuración con la Base de Datos:
+
+La base de datos, para la versión del desarrollo donde se implementó despliegue continuo, se anexó en la carpeta ``db``. Puedes utilizar ésta. 
+Si no desea utilizarla, a continuación está el código para crear la tabla mediante código.
 
 ### Ruta donde se aloja la BD Sqlite:
 
-La ruta relativa donde vas a la base de datos debes configurarla aquí `repository/productRespository.go`, en la linea:
+La ruta relativa donde vas a la base de datos debes configurarla en la variable llamada `LOCATIONFILE` en `repository/productRespository.go`.
 ````go
 const LOCATIONFILE string = "../../../../db/db-apirest-go.db"
 ````
 
-### Crear la BD
-Puede crear la Base de manualmente con el siguiente modelo:
+### Crear la Tabla ``products``
+
+Debe crear la BD con el nombre que desee.
+Con lo siguiente crea la tabla products.
+
 ```sqlite
 CREATE TABLE products (
-    id_product       VARCHAR (255) DEFAULT primary_key,
+    id_product       VARCHAR (255) primary_key,
     name             VARCHAR (255) DEFAULT not_null,
     description      VARCHAR (300),
     status           VARCHAR (45),
@@ -89,7 +96,7 @@ CREATE TABLE products (
     stock            INT
 )
 ```
-En su defecto, dejar que al correr la aplicación la primera vez, está CREARÁ LA BASE DE DATOS MANUALMENTE.
+En su defecto, si no quiere crear la tabla products, al correr la aplicación la primera vez, está CREARÁ LA TABLA automáticamente.
 
 ## Correr el proyecto
 
@@ -101,7 +108,7 @@ En caso de que presente conflicto en correr el proyecto, deberá visualizar, pro
 
 ## Endpoints de la API
 
-La API ofrece los servicios de GET, POST, PULL, DELETE para los productos, y de GET, con Autenticacón básica para Volumenes.
+La API ofrece los servicios de GET, POST, PULL, DELETE para los productos, y de GET, con Autenticación básica para Volumenes.
 
 *Product*
 - GET:   `localhost:9098/products`<br>Extrae todos los productos de la base de datos.<br></br>
@@ -157,7 +164,13 @@ Para realizar las pruebas unitarias es suficiente con abrir la terminal y ubicar
 ````
 # para obtener más información debes de agregar el parametro "-v"
 go test
+go -v test
 ````
+
+## Despliegue continuo
+
+El despliegue continuo se realizó en con la aplicación [Travis](https://app.travis-ci.com/).
+
 
 <br></br>
 <br></br>
